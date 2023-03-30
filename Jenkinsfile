@@ -2,9 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage ('Init stage') {
+        stage('Docker Build') {    
             steps {
-                echo 'hummkay'
+                sh 'docker build -t react-app:latest .'
+            }
+        }
+        stage('Docker Compose UP') {    
+            steps {
+                sh 'docker-compose up -d '
             }
         }
     }
