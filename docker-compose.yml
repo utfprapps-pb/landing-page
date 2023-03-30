@@ -1,0 +1,24 @@
+version: "3.9"
+
+########################### NETWORK
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+
+########################### SERVICES
+services:
+  landing-page:
+    image: react-app:latest
+    container_name: landing-page    
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.landing-page.rule=Host(`app.pb.utfpr.edu.br`)"
+      - "traefik.http.routers.landing-page.entrypoints=websecure"
+      - "traefik.http.routers.landing-page.tls.certresolver=letsencrypt"
+    ports:
+      - 8100:80
+    networks:
+      - web
