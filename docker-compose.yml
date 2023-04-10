@@ -17,6 +17,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.landing-page.rule=Host(`app.pb.utfpr.edu.br`)"
       - "traefik.http.routers.landing-page.entrypoints=websecure"
+      - "traefik.http.routers.landing-page.tls.domains[0].main=app.pb.utfpr.edu.br"
+      - "traefik.http.routers.landing-page.tls.domains[0].sans=*.app.pb.utfpr.edu.br"
       - "traefik.http.routers.landing-page.tls.certresolver=letsencrypt"
     ports:
       - 8100:80
